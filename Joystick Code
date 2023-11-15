@@ -1,0 +1,59 @@
+const int buttonPin = 8; // Digital pin for the joystick button
+const int xPin = A0;     // Analog pin for X-axis
+const int yPin = A1;     // Analog pin for Y-axis
+
+int buttonState = 0; // Variable to store the button state (0 for not pressed, 1 for pressed)
+int xValue = 0;     // Variable to store the X-axis value (0-1023)
+int yValue = 0;     // Variable to store the Y-axis value (0-1023)
+
+void setup() {
+  pinMode(buttonPin, INPUT); // Set the buttonPin as an input
+  Serial.begin(9600);       // Initialize serial communication for debugging
+}
+
+void loop() {
+  // Read the state of the button
+  buttonState = digitalRead(buttonPin);
+
+  // Read the values of the X and Y axes
+  xValue = analogRead(xPin);
+  yValue = analogRead(yPin);
+
+  // Print the values to the serial monitor
+  Serial.print("Button State: ");
+  Serial.print(buttonState);
+  Serial.print(" | X-axis Value: ");
+  Serial.print(xValue);
+  Serial.print(" | Y-axis Value: ");
+  Serial.println(yValue);
+
+  // Check joystick movement for controlling the car
+  if (yValue < 500) {
+    // Move forward
+    // Your code for moving forward goes here
+    // For example: MoveForward();
+  } else if (yValue > 600) {
+    // Move backward
+    // Your code for moving backward goes here
+    // For example: MoveBackward();
+  }
+
+  if (xValue < 500) {
+    // Turn left
+    // Your code for turning left goes here
+    // For example: TurnLeft();
+  } else if (xValue > 600) {
+    // Turn right
+    // Your code for turning right goes here
+    // For example: TurnRight();
+  }
+
+  // Check the button state for any additional actions
+  if (buttonState == 1) {
+    // Perform an action when the button is pressed
+    // Your code for button press action goes here
+    // For example: PerformButtonAction();
+  }
+
+  delay(100); // Add a small delay to prevent excessive serial output and provide stability
+}
